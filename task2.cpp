@@ -3,26 +3,29 @@
 #include <cwctype> 
 #include "headerLr6.h"
 
-void inputArr(wchar_t *&arr, int &size, int &capacity);
-void cleaner(wchar_t *arr, int &size, int &capacity);
+
+void cleaner(wchar_t *&arr, int &size, int &capacity);
 
 int main()
 {
     int capacity = 10, size = 0;
     wchar_t *arr = new wchar_t[capacity];
-    inputArr(arr, size, capacity);
+    //inputArr(arr, size, capacity);
+    meininputarray(arr, capacity); 
     cleaner(arr, size, capacity);
+    std::wcout << "Clean string: " << arr << '\n';
+    delete [] arr;
     return 0;
 }
 
 
-void cleaner(wchar_t *arr, int &size, int &capacity)
+void cleaner(wchar_t *&arr, int &size, int &capacity)
 {
     int new_capacity = 10;
     int new_size = 0;
     wchar_t *newarr = new wchar_t[new_capacity];
     
-    for (int i = 0; i < size; ++i) 
+    for (int i = 0; arr[i]!=L'\0'; ++i) 
     {
         if (new_size == new_capacity - 1)
         {
@@ -44,5 +47,5 @@ void cleaner(wchar_t *arr, int &size, int &capacity)
     size = new_size;
     capacity = new_capacity;
 
-    std::wcout << arr;
+    //std::wcout << arr;
 }

@@ -17,51 +17,49 @@ int main()
     // std::wcout << one << '\n';
     input_c_string(two, size);
     // std::wcout << two << '\n';
-    bool taskexit = false;
+    int taskexit = 0;
     menutask3();
-    while (!taskexit)
+    while (taskexit==0)
     {
-
+        //int y=vvod();
         std::string s;
-        int x;
+        int y=0;
 
         do
-        {
+        {   std::wcout << "vvedite nomer bybrannoj functsyy: ";
             std::getline(std::cin, s);
-            x = std::atoi(s.c_str());
-        } while (s.find_first_not_of("1234") != std::string::npos || x < 1 || x > 4);
+            y = std::atoi(s.c_str());
+        } while (s.find_first_not_of("1234") != std::string::npos || y < 1 || y > 4);
 
-        switch (x)
-        {
-        case 1:
+        if (y==1)
         {
             int res = meinstrcmp(one, two);
             std::wcout << res << '\n'
                        << "one: " << one << '\n'
                        << "two: " << two << '\n';
-            break;
+            
         }
-        case 2:
+        else if (y==2)
         {
             meinstrcat(one, two);
             std::wcout << "one: " << one << '\n'
                        << "two: " << two << '\n';
-            break;
+           
         }
-        case 3:
+        else if (y==3)
         {
             meinstrcpy(two, one, 100);
             std::wcout << "one: " << one << '\n'
                        << "two: " << two << '\n';
-            break;
+           
         }
-        case 4:
+        else
         {
-            taskexit = true;
-            break;
+            taskexit = 1;
+           
         }
         }
-    }
+    
 
     delete[] one;
     delete[] two;

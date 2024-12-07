@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstdio>
+
 void chech(char *buf, int bufsize, char *ps, int &pssize);
+
 int main()
 {
     char *s = new char[81];
@@ -28,7 +30,6 @@ int main()
         }
         else
         {
-
             chech(buf, i, ps, pssize);
             buf[0] = '\0';
             i = 0;
@@ -42,51 +43,34 @@ int main()
 }
 void chech(char *buf, int bufsize, char *ps, int &pssize)
 {
-
     int countminus = 0;
     int countpoint = 0;
     if (buf[0] == '.')
         return;
     for (int i = 0; i < bufsize; ++i)
     {
-
         if (buf[i] == '-' && isdigit(buf[i + 1]) == true)
             ++countminus;
         if (buf[i] == '.')
         {
-
             ++countpoint;
             if (isdigit(buf[i + 1]) != true || isdigit(buf[i - 1]) != true)
             {
-                // ps[0] = '\0';
-                //  pssize = 0;
                 return;
             }
         }
-        if (buf[i] == '-' && (isdigit(buf[i + 1]) == false || isdigit(buf[i-1])==true))
+        if (buf[i] == '-' && (isdigit(buf[i + 1]) == false || isdigit(buf[i - 1]) == true))
             return;
         if (countminus > 1 || (buf[i] == '-' && !isdigit(buf[i + 1]) && isdigit(buf[i - 1] == true)) || countpoint > 1)
-        {   // {   ps[0] = '\0';
-            // pssize = 0;
+        {
             return;
         }
-        // if (countpoint == 0)
-        // {
-        //     ps[pssize++] = '.';
-        //     ps[pssize++] = '0';
-        // }
     }
     for (int k = 0; k < bufsize; ++k)
     {
         ps[pssize++] = buf[k];
     }
-    // if (pssize > 0 && ps[pssize - 1] == '-')
-    // {
-    //     pssize -= 2;
-    // }
 
-    // if (countpoint != 1)
-    //         return;
     if (buf[0] != '\0')
         ps[pssize++] = ' ';
 }
