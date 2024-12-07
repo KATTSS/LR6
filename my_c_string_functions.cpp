@@ -2,36 +2,6 @@
 #include <cwctype>
 #include <wchar.h>
 #include "headerLr6.h"
-void input_c_string(wchar_t *arr, int size);
-int meinstrcmp(wchar_t *one, wchar_t *two);
-void meinstrcat(wchar_t *&one, wchar_t *two);
-void meinstrcpy(wchar_t *&one, wchar_t *two, int n);
-int main()
-{
-    int size = 201;
-    wchar_t *one = new wchar_t[size];
-    wchar_t *two = new wchar_t[size];
-
-    input_c_string(one, size);
-    // std::wcout << one << '\n';
-    input_c_string(two, size);
-    // std::wcout << two << '\n';
-
-    int res = meinstrcmp(one, two);
-    std::wcout << res << '\n';
-
-    meinstrcat(one, two);
-    std::wcout << one << '\n';
-
-    meinstrcpy(two, one, 100);
-    std::wcout << "one: " << one << '\n'
-               << "two: " << two << '\n';
-
-    delete[] one;
-    delete[] two;
-    return 0;
-}
-
 
 int meinstrcmp(wchar_t *one, wchar_t *two)
 {

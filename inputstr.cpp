@@ -36,3 +36,34 @@ void input_c_string(wchar_t *arr, int size)
     }
     arr[i] = L'\0';
 }
+
+void menu() //needs redaction
+{
+
+    std::cout << "\nСуть программы - 1" << std::endl;
+    std::cout << "Кто выполнил задание? - 2" << std::endl;
+    std::cout << "Запуск программы - 3" << std::endl;
+    std::cout << "Завершить программу - 4" << std::endl;
+    std::cout << "Меню - 5\n"
+              << std::endl;
+}
+
+void menutask3()
+{
+
+    std::cout << "\nMy analog strcmp(s1,s2)(sravnenie strok)- 1" << std::endl;
+    std::cout << "My analog strcat(s1,s2)(ob'edinenie strok) - 2" << std::endl;
+    std::cout << "My analog strcpy(s1,s2)(kopirovanie strok) - 3" << std::endl;  
+}
+
+int vvod()
+{
+    std::string s;
+    int x;
+    do
+    {
+        std::getline(std::cin, s);
+        x = std::atoi(s.c_str());
+    } while (s.find_first_not_of("1234567890") != std::string::npos);
+    return x;
+}

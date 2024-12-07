@@ -1,84 +1,69 @@
 #include <iostream>
 #include <cwctype>
+#include <wchar.h>
 #include "headerLr6.h"
-void MYstrcat(wchar_t *&one, int size1, wchar_t *&two, int size2);
-// void MYstrcpy(wchar_t *&one, int size1, wchar_t *&two, int size2, int n);
-void inputArr(wchar_t *&arr, int &size, int &capacity);
-int MYstrcmp(wchar_t *one, int size1, wchar_t *two, int size2);
-
+#include <string>
+// void input_c_string(wchar_t *arr, int size);
+// int meinstrcmp(wchar_t *one, wchar_t *two);
+// void meinstrcat(wchar_t *&one, wchar_t *two);
+// void meinstrcpy(wchar_t *&one, wchar_t *two, int n);
 int main()
 {
-    int cap1 = 10, cap2 = 10;
-    int size1 = 0, size2 = 0;
+    int size = 201;
+    wchar_t *one = new wchar_t[size];
+    wchar_t *two = new wchar_t[size];
 
-    wchar_t *one = new wchar_t[cap1];
-    wchar_t *two = new wchar_t[cap2];
+    input_c_string(one, size);
+    // std::wcout << one << '\n';
+    input_c_string(two, size);
+    // std::wcout << two << '\n';
+    bool taskexit = false;
+    menutask3();
+    while (!taskexit)
+    {
 
-    inputArr(one, size1, cap1);
-    inputArr(two, size2, cap2);
+        std::string s;
+        int x;
 
-    int res = MYstrcmp(one, size1, two, size2);
-    std::wcout << res << '\n';
-    MYstrcat(one, size1, two, size2);
-    // MYstrcpy(one, size1, two, size2, 100);
+        do
+        {
+            std::getline(std::cin, s);
+            x = std::atoi(s.c_str());
+        } while (s.find_first_not_of("1234") != std::string::npos || x < 1 || x > 4);
+
+        switch (x)
+        {
+        case 1:
+        {
+            int res = meinstrcmp(one, two);
+            std::wcout << res << '\n'
+                       << "one: " << one << '\n'
+                       << "two: " << two << '\n';
+            break;
+        }
+        case 2:
+        {
+            meinstrcat(one, two);
+            std::wcout << "one: " << one << '\n'
+                       << "two: " << two << '\n';
+            break;
+        }
+        case 3:
+        {
+            meinstrcpy(two, one, 100);
+            std::wcout << "one: " << one << '\n'
+                       << "two: " << two << '\n';
+            break;
+        }
+        case 4:
+        {
+            taskexit = true;
+            break;
+        }
+        }
+    }
 
     delete[] one;
     delete[] two;
     return 0;
 }
-int MYstrcmp(wchar_t *one, int size1, wchar_t *two, int size2)
-{
-    int i = 0, j = 0;
-    while (i < size1 && j < size2)
-    {
-        if (one[i] > two[j])
-            return 1;
-        else if (one[i] < two[j])
-            return -1;
-        else
-        {
-            ++i;
-            ++j;
-        }
-    }
-    if (size1 > size2)
-        return 1;
-    else if (size1 < size2)
-
-        return -1;
-    else
-        return 0;
-}
-
-void MYstrcat(wchar_t *&one, int size1, wchar_t *&two, int size2)
-{
-    wchar_t *added = new wchar_t[size1 + size2];
-    std::wmemcpy(added, one, size1);
-    //delete[] one;
-
-    for (int i = 0; i < size2; i++)
-    {
-        added[size1+i] = two[i];
-    }
-    added[size1]='\0';
-    one[0]='\0';
-    one = added;
-    std::wcout << one << '\n';
-    delete [] added;
-}
-
-// void MYstrcpy(wchar_t *&one, int size1, wchar_t *&two, int size2, int n)
-// {
-//     if (size1 < size2)
-//     {
-//         std::cout << "full copying is impossible" << '\n';
-//         size2 = size1;
-//     }
-//     if (n >= size2)
-//         n = size2;
-//     for (int i = 0; i < n; ++i)
-//     {
-//         one[i] = two[i];
-//     }
-//     std::wcout << one << '\n';
-// }
