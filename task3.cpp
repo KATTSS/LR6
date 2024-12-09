@@ -3,11 +3,8 @@
 #include <wchar.h>
 #include "headerLr6.h"
 #include <string>
-// void input_c_string(wchar_t *arr, int size);
-// int meinstrcmp(wchar_t *one, wchar_t *two);
-// void meinstrcat(wchar_t *&one, wchar_t *two);
-// void meinstrcpy(wchar_t *&one, wchar_t *two, int n);
-int main()
+
+int task3()
 {
     int size = 201;
     wchar_t *one = new wchar_t[size];
@@ -22,14 +19,14 @@ int main()
     while (taskexit==0)
     {
         //int y=vvod();
-        std::string s;
+        std::wstring s;
         int y=0;
 
         do
-        {   std::wcout << "vvedite nomer bybrannoj functsyy: ";
-            std::getline(std::cin, s);
-            y = std::atoi(s.c_str());
-        } while (s.find_first_not_of("1234") != std::string::npos || y < 1 || y > 4);
+        {   std::wcout << "\nВведите номер выбранной функции: ";
+            std::getline(std::wcin, s);
+            y = std::wcstol(s.c_str(), nullptr, 10);
+        } while (s.find_first_not_of(L"1234") != std::wstring::npos || y < 1 || y > 4);
 
         if (y==1)
         {
@@ -56,7 +53,6 @@ int main()
         else
         {
             taskexit = 1;
-           
         }
         }
     

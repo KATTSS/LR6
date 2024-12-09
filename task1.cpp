@@ -1,24 +1,28 @@
 #include <iostream>
 #include <cstdio>
+#include <limits> 
+#include "headerLr6.h"
 
-void chech(char *buf, int bufsize, char *ps, int &pssize);
+//void chech(char *buf, int bufsize, char *ps, int &pssize);
 
-int main()
+int task1()
 {
-    char *s = new char[81];
-    char c;
+    wchar_t *s = new wchar_t[81];
+    wchar_t c;
     int i = 0;
-    while ((c = getchar()) != '\n' && i < 81)
+    std::wcout << L"Введите строку: ";
+    
+    while ((c = getwchar()) != '\n' && i<80)
     {
         s[i] = c;
         ++i;
     }
     s[i] = '\0';
     // Катя лапочка <3
-
+    //std::wcout << L"Vvedennaya stroka: " << s << '\n';
     i = 0;
-    char *ps = new char[81];
-    char *buf = new char[81];
+    wchar_t *ps = new wchar_t[81];
+    wchar_t *buf = new wchar_t[81];
 
     int pssize = 0;
     for (int j = 0; j < 81; j++)
@@ -35,42 +39,9 @@ int main()
             i = 0;
         }
     }
-    std::cout << ps;
+    std::wcout << L"Очищенная строка: " << ps << '\n';
     delete[] s;
     delete[] ps;
     delete[] buf;
     return 0;
-}
-void chech(char *buf, int bufsize, char *ps, int &pssize)
-{
-    int countminus = 0;
-    int countpoint = 0;
-    if (buf[0] == '.')
-        return;
-    for (int i = 0; i < bufsize; ++i)
-    {
-        if (buf[i] == '-' && isdigit(buf[i + 1]) == true)
-            ++countminus;
-        if (buf[i] == '.')
-        {
-            ++countpoint;
-            if (isdigit(buf[i + 1]) != true || isdigit(buf[i - 1]) != true)
-            {
-                return;
-            }
-        }
-        if (buf[i] == '-' && (isdigit(buf[i + 1]) == false || isdigit(buf[i - 1]) == true))
-            return;
-        if (countminus > 1 || (buf[i] == '-' && !isdigit(buf[i + 1]) && isdigit(buf[i - 1] == true)) || countpoint > 1)
-        {
-            return;
-        }
-    }
-    for (int k = 0; k < bufsize; ++k)
-    {
-        ps[pssize++] = buf[k];
-    }
-
-    if (buf[0] != '\0')
-        ps[pssize++] = ' ';
 }

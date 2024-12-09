@@ -1,9 +1,12 @@
 #include <cwctype> 
 #include <iostream>
+#include <limits>
 #include "headerLr6.h"
+#include <locale>
+
 
 void input_c_string(wchar_t *arr, int size)
-{
+{   std::wcout << L"Введите строку: " << '\n';
     wchar_t el;
     int i = 0;
     while ((el = std::getwchar()) != L'\n' && i < size - 1)
@@ -14,42 +17,34 @@ void input_c_string(wchar_t *arr, int size)
     arr[i] = L'\0';
 }
 
-void menu() //needs redaction
+void menu() 
 {
 
-    std::cout << "\nСуть программы - 1" << std::endl;
-    std::cout << "Кто выполнил задание? - 2" << std::endl;
-    std::cout << "Запуск программы - 3" << std::endl;
-    std::cout << "Завершить программу - 4" << std::endl;
-    std::cout << "Меню - 5\n"
-              << std::endl;
+    std::wcout << L"\nAuthor- 1" << std::endl;
+    std::wcout << L"Task 1 - 2" << std::endl;
+    std::wcout << L"Task 2 - 3" << std::endl;
+    std::wcout << L"Task 3 - 4" << std::endl;
+    std::wcout << L"Меню - 5" << std::endl;
+    std::wcout << L"Выход - 6" << std::endl;
 }
 
 void menutask3()
 {
 
-    std::cout << "\nMy analog strcmp(s1,s2)(sravnenie strok)- 1" << std::endl;
-    std::cout << "My analog strcat(s1,s2)(ob'edinenie strok) - 2" << std::endl;
-    std::cout << "My analog strcpy(s1,s2)(kopirovanie strok) - 3" << std::endl;
-    std::cout << "Vyhod iz zadaniya - 4" << std::endl;   
+    std::wcout << L"\nМой аналог strcmp(s1,s2)(сравнение строк)- 1" << std::endl;
+    std::wcout << L"Мой аналог strcat(s1,s2)(объединение строк) - 2" << std::endl;
+    std::wcout << L"Мой аналог strcpy(s1,s2)(копирование строк) - 3" << std::endl;
+    std::wcout << L"Выход из задания - 4" << std::endl;   
 }
 
-int vvod()
-{
-    std::string s;
-    int x;
-    do
-    {
-        std::getline(std::cin, s);
-        x = std::atoi(s.c_str());
-    } while (s.find_first_not_of("1234567890") != std::string::npos);
-    return x;
-}
 
 void meininputarray(wchar_t *&array, int &size) {
-   std::wcout << "Vvedite stroky: " << '\n';
+    //std::locale::global(std::locale(""));
+    std::setlocale(LC_ALL, "en_US.UTF-8");
+    std::wcout << "Vvedite stroky: " << '\n';
     wchar_t el;
     int i=0;
+   
     while ((el = std::getwchar()) != L'\n') {
         if (i>=size-1) {
             size*=2;

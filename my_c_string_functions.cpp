@@ -55,12 +55,84 @@ void meinstrcpy(wchar_t *&one, wchar_t *two, int n)
     {
         std::wcout << "full copying is impossible" << '\n';
         size2 = size1;
-    } else if (n >= size2)
+    }
+    else if (n >= size2)
         std::wcout << "full copying is impossible" << '\n';
-        n = size2;
+    n = size2;
     for (int i = 0; i < n; ++i)
     {
         one[i] = two[i];
     }
     // std::wcout << one << '\n';
+}
+
+void cleaner(wchar_t *&arr, int &size, int &capacity)
+{
+    int new_capacity = 10;
+    int new_size = 0;
+    wchar_t *newarr = new wchar_t[new_capacity];
+
+    for (int i = 0; arr[i] != L'\0'; ++i)
+    {
+        if (new_size == new_capacity - 1)
+        {
+            new_capacity *= 2;
+            wchar_t *newArr = new wchar_t[new_capacity];
+            std::wmemcpy(newArr, newarr, new_size);
+            delete[] newarr;
+            newarr = newArr;
+        }
+        if (arr[i] == L' ' || iswalpha(arr[i]))
+        {
+            newarr[new_size++] = arr[i];
+        }
+    }
+    newarr[new_size] = L'\0';
+
+    delete[] arr;
+    arr = newarr;
+    size = new_size;
+    capacity = new_capacity;
+
+    // std::wcout << arr;
+}
+
+void chech(wchar_t *buf, int bufsize, wchar_t *&ps, int &pssize)
+{
+    int countminus = 0;
+    int countpoint = 0;
+    if (buf[0] == L'.')
+        return;
+    for (int i = 0; i < bufsize; ++i)
+    {
+        if (buf[i] == L'-' && isdigit(buf[i + 1]) == true)
+            ++countminus;
+        if (buf[i] == L'.')
+        {
+            ++countpoint;
+            if (isdigit(buf[i + 1]) != true || isdigit(buf[i - 1]) != true)
+            {
+                return;
+            }
+        }
+        if (buf[i] == L'-' && (isdigit(buf[i + 1]) == false || isdigit(buf[i - 1]) == true))
+            return;
+        if (countminus > 1 || (buf[i] == L'-' && !isdigit(buf[i + 1]) && isdigit(buf[i - 1] == true)) || countpoint > 1)
+        {
+            return;
+        }
+    }
+    for (int k = 0; k < bufsize; ++k)
+    {
+        ps[pssize] = buf[k];
+        ++pssize;
+    }
+
+    if (buf[0] != L'\0')
+    {
+        ps[pssize] = ' ';
+        ++pssize;
+    }
+    ps[pssize] = L'\0';
+    // std::wcout << ps;
 }
